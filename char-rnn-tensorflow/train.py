@@ -139,7 +139,7 @@ def train(args):
                     saver.save(sess, checkpoint_path,
                                global_step=e * data_loader.num_batches + b)
                     print("model saved to {}".format(checkpoint_path))
-  saver.save(sess, os.path.join(args.sm_model_dir, "model.ckpt"))
+    saver.save(sess, os.path.join(args.sm_model_dir, "model.ckpt"))
 
 if __name__ == '__main__':
     train(args)
