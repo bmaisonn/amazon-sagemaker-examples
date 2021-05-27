@@ -55,6 +55,7 @@ parser.add_argument('--output_keep_prob', type=float, default=1.0,
                     help='probability of keeping weights in the hidden layer')
 parser.add_argument('--input_keep_prob', type=float, default=1.0,
                     help='probability of keeping weights in the input layer')
+parser.add_argument("--sm-model-dir", type=str, default=os.environ.get("SM_MODEL_DIR"))
 args = parser.parse_args()
 
 import tensorflow as tf
@@ -138,7 +139,7 @@ def train(args):
                     saver.save(sess, checkpoint_path,
                                global_step=e * data_loader.num_batches + b)
                     print("model saved to {}".format(checkpoint_path))
-
+  saver.save(sess, os.path.join(args.sm_model_dir, "model.ckpt"))
 
 if __name__ == '__main__':
     train(args)
